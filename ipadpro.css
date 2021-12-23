@@ -11,31 +11,24 @@ html {
 }
 
 .appicon {
-    width: 4.5rem;
-    min-height: 4.5rem;
-    /* background-color: white; */
-    /* border: 1px solid #ffffff; */
+    width: 70px;
+    min-height: 70px;
     border-radius: 20px;
     transition: all 100ms linear;
     margin: 7px;
     text-align: center;
 }
 
+.appiconmove {
+    transition: all 100ms linear;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
 .appicon:hover {
     transform: scale(1.1);
     /* cursor: none; */
-}
-
-.appicon>img {
-    /* border-radius: 25%; */
-    max-width: 80px;
-    max-height: 80px;
-    /* transition: all 100ms linear; */
-}
-
-.appicon:hover>img {
-    /* background-color: #ffffff; */
-    /* box-shadow: 0 0 0 5px #ffffff; */
 }
 
 .backblur {
@@ -66,7 +59,7 @@ html {
 }
 
 .cursorscale {
-    transform: scale(4);
+    transform: scale(2);
     border-radius: 20%;
 }
 
