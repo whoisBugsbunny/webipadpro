@@ -21,9 +21,47 @@ var d1 = new Date;
 dd.innerText = day[d1.getDay()] + ', ' + d1.getDate() + ' ' + mL[d1.getMonth()];
 
 const cursor = document.querySelector('.cursor');
+const contextmenu = document.querySelector('.contextmenu');
 document.addEventListener('mousemove', e => {
-    cursor.setAttribute('style', 'top:' + (e.pageY - 10) + 'px;left:' + (e.pageX - 10) + 'px;');
+    cursor.setAttribute('style', 'top:' + (e.pageY) + 'px;left:' + (e.pageX) + 'px;');
 });
+document.addEventListener('click', e => {
+    cursor.classList.add("cursorclicked");
+    // contextmenu.removeAttribute('style');
+    setTimeout(() => {
+        cursor.classList.remove("cursorclicked");
+    }, 150);
+    contextmenu.classList.remove("showcontextmenu");
+});
+const contextmenucontent = document.querySelector('contextmenucontent');
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    contextmenu.classList.add("showcontextmenu");
+    contextmenu.setAttribute('style', 'top:' + (e.pageY) + 'px;left:' + (e.pageX) + 'px;');
+});
+// navigation bar code by ChatGPT
+window.addEventListener('DOMContentLoaded', () => {
+    if ('getBattery' in navigator) {
+        navigator.getBattery().then(function (battery) {
+            function updateBatteryStatus() {
+                const batteryStatus = document.getElementById('battery-status');
+                batteryStatus.innerHTML = Math.floor(battery.level * 100) + "%" + (battery.charging ? '<i class="fa fa-bolt" aria-hidden="true"></i>' : '');
+            }
+
+            // Initial battery status
+            updateBatteryStatus();
+
+            // Update battery status when it changes
+            battery.addEventListener('levelchange', updateBatteryStatus);
+            battery.addEventListener('chargingchange', updateBatteryStatus);
+        });
+    }
+    else {
+        // const batteryStatus = document.getElementById('battery-status');
+        // batteryStatus.innerHTML = "Battery status API is not supported in this browser.";
+    }
+});
+
 
 const appicon = document.querySelectorAll('.appicon');
 const appiconmove = document.querySelectorAll('.appiconmove');
@@ -33,53 +71,18 @@ const appiconmove = document.querySelectorAll('.appiconmove');
 // appiconmove[i].addEventListener('mouseenter', function(e) { onMouseHover(i, e); });
 // appiconmove[i].addEventListener('mouseleave', function(e) { onMouseHoverOut(i, e); });
 // }
-// this does not work with loop so i had to used is one by one until i'll find solution
-{
-    appiconmove[0].addEventListener('mouseenter', function (e) { onMouseHover(0, e); });
-    appiconmove[0].addEventListener('mouseleave', function (e) { onMouseHoverOut(0, e); });
-    appiconmove[1].addEventListener('mouseenter', function (e) { onMouseHover(1, e); });
-    appiconmove[1].addEventListener('mouseleave', function (e) { onMouseHoverOut(1, e); });
-    appiconmove[2].addEventListener('mouseenter', function (e) { onMouseHover(2, e); });
-    appiconmove[2].addEventListener('mouseleave', function (e) { onMouseHoverOut(2, e); });
-    appiconmove[3].addEventListener('mouseenter', function (e) { onMouseHover(3, e); });
-    appiconmove[3].addEventListener('mouseleave', function (e) { onMouseHoverOut(3, e); });
-    appiconmove[4].addEventListener('mouseenter', function (e) { onMouseHover(4, e); });
-    appiconmove[4].addEventListener('mouseleave', function (e) { onMouseHoverOut(4, e); });
-    appiconmove[5].addEventListener('mouseenter', function (e) { onMouseHover(5, e); });
-    appiconmove[5].addEventListener('mouseleave', function (e) { onMouseHoverOut(5, e); });
-    appiconmove[6].addEventListener('mouseenter', function (e) { onMouseHover(6, e); });
-    appiconmove[6].addEventListener('mouseleave', function (e) { onMouseHoverOut(6, e); });
-    appiconmove[7].addEventListener('mouseenter', function (e) { onMouseHover(7, e); });
-    appiconmove[7].addEventListener('mouseleave', function (e) { onMouseHoverOut(7, e); });
-    appiconmove[8].addEventListener('mouseenter', function (e) { onMouseHover(8, e); });
-    appiconmove[8].addEventListener('mouseleave', function (e) { onMouseHoverOut(8, e); });
-    appiconmove[9].addEventListener('mouseenter', function (e) { onMouseHover(9, e); });
-    appiconmove[9].addEventListener('mouseleave', function (e) { onMouseHoverOut(9, e); });
-    appiconmove[10].addEventListener('mouseenter', function (e) { onMouseHover(10, e); });
-    appiconmove[10].addEventListener('mouseleave', function (e) { onMouseHoverOut(10, e); });
-    appiconmove[11].addEventListener('mouseenter', function (e) { onMouseHover(11, e); });
-    appiconmove[11].addEventListener('mouseleave', function (e) { onMouseHoverOut(11, e); });
-    appiconmove[12].addEventListener('mouseenter', function (e) { onMouseHover(12, e); });
-    appiconmove[12].addEventListener('mouseleave', function (e) { onMouseHoverOut(12, e); });
-    appiconmove[13].addEventListener('mouseenter', function (e) { onMouseHover(13, e); });
-    appiconmove[13].addEventListener('mouseleave', function (e) { onMouseHoverOut(13, e); });
-    appiconmove[14].addEventListener('mouseenter', function (e) { onMouseHover(14, e); });
-    appiconmove[14].addEventListener('mouseleave', function (e) { onMouseHoverOut(14, e); });
-    appiconmove[15].addEventListener('mouseenter', function (e) { onMouseHover(15, e); });
-    appiconmove[15].addEventListener('mouseleave', function (e) { onMouseHoverOut(15, e); });
-    appiconmove[16].addEventListener('mouseenter', function (e) { onMouseHover(16, e); });
-    appiconmove[16].addEventListener('mouseleave', function (e) { onMouseHoverOut(16, e); });
-    appiconmove[17].addEventListener('mouseenter', function (e) { onMouseHover(17, e); });
-    appiconmove[17].addEventListener('mouseleave', function (e) { onMouseHoverOut(17, e); });
-    appiconmove[18].addEventListener('mouseenter', function (e) { onMouseHover(18, e); });
-    appiconmove[18].addEventListener('mouseleave', function (e) { onMouseHoverOut(18, e); });
-    appiconmove[19].addEventListener('mouseenter', function (e) { onMouseHover(19, e); });
-    appiconmove[19].addEventListener('mouseleave', function (e) { onMouseHoverOut(19, e); });
-    appiconmove[20].addEventListener('mouseenter', function (e) { onMouseHover(20, e); });
-    appiconmove[20].addEventListener('mouseleave', function (e) { onMouseHoverOut(20, e); });
+
+for (let i = 0; i < appiconmove.length; i++) {
+    appiconmove[i].addEventListener('mouseenter', function (e) {
+        onMouseHover(i, e);
+    });
+    appiconmove[i].addEventListener('mouseleave', function (e) {
+        onMouseHoverOut(i, e);
+    });
 }
-appicon[23].addEventListener('mouseenter', function (e) { onMouseHover(23, e); });
-appicon[23].addEventListener('mouseleave', function (e) { onMouseHoverOut(23, e); });
+
+// appicon[23].addEventListener('mouseenter', function (e) { onMouseHover(23, e); });
+// appicon[23].addEventListener('mouseleave', function (e) { onMouseHoverOut(23, e); });
 
 
 // Hover an element
@@ -88,8 +91,12 @@ const ttt = document.getElementById('ttt');
 function onMouseHover(i, e) {
     cursor.classList.add('cursorscale');
     appiconmove[i].addEventListener('mousemove', e => {
-        var top = (e.offsetY - 35) / 3;
-        var left = (e.offsetX - 35) / 3;
+        iconWidth = e.target.clientWidth;
+        // iconHeight = e.target.clientHeight;
+        const iconwh2 = iconWidth / 2;
+        const woblestrength = 3;
+        var top = (e.offsetY - (iconwh2)) / woblestrength;
+        var left = (e.offsetX - (iconwh2)) / woblestrength;
         appiconmove[i].setAttribute('style', `top:${top}px;left:${left}px;`);
     });
 }
