@@ -7,7 +7,8 @@
 :root {
 	--font1: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
 		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-	--wallpaper: url(images/ipadairdark.jpg);
+	/* --wallpaper: url(images/ipadairdark.jpg); */
+	--wallpaper: url(images/ios-14-stock.jpg);
 	--cursorTransparentBlack: #20202160;
 	--cursorTransparentGray: #ffffff60;
 	--cursorContextbg: #202021e0;
@@ -62,7 +63,7 @@ html {
 	overflow: hidden;
 }
 #body {
-	cursor: none;
+	/* cursor: none; */
 }
 ::-webkit-scrollbar {
 	background-color: var(--tabColor);
@@ -109,8 +110,8 @@ html {
 	display: none !important;
 }
 .appicon {
-	width: fit-content;
-	height: var(--iconSize);
+	width: 100%;
+	height: 100%;
 	border-radius: var(--iconRadius);
 	transition: var(--transitionA100L);
 	margin: 7px;
@@ -118,11 +119,13 @@ html {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 }
 .appicon > img {
 	width: var(--iconSize);
 	height: var(--iconSize);
 	border-radius: var(--iconRadius);
+	filter: hue-rotate(180deg);
 }
 .transition100all {
 	transition: var(--transitionA100L);
@@ -268,9 +271,10 @@ html {
 	width: 100%;
 	grid-template-columns: repeat(6, 1fr);
 	/* grid-gap: 1em; */
-	justify-items: center;
+	justify-items: stretch;
 	align-items: center;
 	padding: 20px;
+	align-content: stretch;
 }
 
 .homebottomapptray {
@@ -410,8 +414,10 @@ html {
 	background-size: cover !important;
 	background-repeat: no-repeat !important;
 }
-
-.widgetimage {
+.widget-search-back-image {
+	background: url(images/2xipad.jpg);
+}
+.widget-profile-image {
 	background: url(images/me_edit1.png);
 }
 
@@ -509,24 +515,27 @@ html {
 /* window css */
 
 .window {
+	resize: both;
 	overflow: hidden;
 	position: absolute;
 	background-color: #ffffff;
-	min-width: 500px;
-	min-height: 300px;
+	min-width: 200px;
+	min-height: 200px;
+	max-width: 100%;
+	max-height: 100%;
+	width: 50%;
+	height: 50%;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border-radius: 5px;
 	cursor: default;
-	height: 300px;
-	width: 500px;
 	box-shadow: 0 0 1px 0 var(--windowBoxShadow);
 	transition: height var(--tranDurationType), width var(--tranDurationType);
 }
 .windowFullScreen {
-	height: 100%;
-	width: 100%;
+	height: 100% !important;
+	width: 100% !important;
 	top: 50% !important;
 	left: 50% !important;
 	transition: all var(--tranDurationType);
@@ -545,6 +554,7 @@ html {
 	justify-content: space-between;
 	align-items: center;
 	height: 25px;
+	color: #000;
 	/* box-shadow: 0px 0px 1px 0px #e4e4e4; */
 	border-bottom: 1px solid #e4e4e4;
 }
@@ -619,4 +629,17 @@ html {
 }
 .notOptimize {
 	display: none;
+}
+
+.tickColon {
+	opacity: 1;
+	color: #ffffff;
+	transition: opacity 500ms linear;
+}
+.opacity-0 {
+	opacity: 0;
+}
+
+.appNotAvail {
+	filter: opacity(0.5) grayscale(1) !important;
 }

@@ -1,0 +1,1 @@
+export const helloWorldMessage = "Hello World! The import from another module is working correctly.";

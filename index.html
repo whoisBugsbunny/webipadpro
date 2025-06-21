@@ -8,13 +8,12 @@
     <title>web ipad pro</title>
     <link rel="stylesheet" href="ipadpro.css">
     <script src="https://kit.fontawesome.com/6a97ae265c.js" crossorigin="anonymous"></script>
-    <script src="kit.fontawesome.com/6a97ae265c.js" crossorigin="anonymous"></script>
-    <script src="ipadpro.js" defer></script>
 </head>
 <div id="notOptimize" class="notOptimize">not optimized for Mobile</div>
 
 <body>
     <div id="body" class="background">
+        <div class="custom-cursor"></div>
         <div class="notificationbar">
             <div class="notificationleft">
                 <i class="fa fa-instagram"></i>
@@ -34,7 +33,7 @@
                     <p id="time" style="font-size: 5vw;"></p>
                     <p id="daydate" style="font-size: 1.6vw;"></p>
                 </div>
-                <div class="widget widgetimage widgetimgcommon widgetcenter" style="grid-column: 1/3;">
+                <div class="widget widget-search-back-image widgetimgcommon widgetcenter" style="grid-column: 1/3;">
                     <P>Google</P>
                     <div class="googlesearchbg"><input type="search" class="googlesearch" name="" id=""></div>
                 </div>
@@ -42,7 +41,7 @@
                     <div class="sun"></div>
                     <div class="suncloud"></div>
                 </div>
-                <div class="widget widgetimage widgetimgcommon widgetcenter"></div>
+                <div class="widget widget-profile-image widgetimgcommon widgetcenter"></div>
                 <div class="widget widgetstock widgetimgcommon">TSX: +0.34<br>GOGL: +1.25<br>FCBK: -0.21</div>
                 <div class="widget widgetclock widgetimgcommon"></div>
 
@@ -57,93 +56,8 @@
                     <li>nul</li>
                 </div>
             </div>
-            <div class="hometopapptray">
-                <div class="appicon">
-                    <img class="appiconmove" name="music" src="ios14icons/svg/apple-music-2365226.svg">
-                    <span style="text-align: center;">Music</span>
-                </div>
-                <div class="appicon" id="ttt">
-                    <img class="appiconmove" name="noname" src="ios14icons/svg/apple-tv-1575940.svg">
-                    <span style="text-align: center;">TV</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="reminder" src="ios14icons/svg/reminders-2365242.svg">
-                    <span style="text-align: center;">Reminder</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="noname" src="ios14icons/svg/measure-1575947.svg">
-                    <span style="text-align: center;">Measure</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="calculator" src="ios14icons/svg/calculator-1575939.svg">
-                    <span style="text-align: center;">Calculator</span>
-                </div>
-                <div class="appicon" onclick="window.open('https://chrome.google.com/webstore/category/extensions')">
-                    <img class="appiconmove" name="noname" src="ios14icons/svg/app-store-2365235.svg">
-                    <span style="text-align: center;">Store</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="noname" src="ios14icons/svg/books-2365234.svg">
-                    <span style="text-align: center;">Books</span>
-                </div>
-                <div class="appicon" onclick="window.open('//www.firebase.com')">
-                    <img class="appiconmove" name="noname" src="icons/google-firebase.svg">
-                    <span style="text-align: center;">Firebase</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="noname" src="ios14icons/svg/my-shortcuts-1575945.svg">
-                    <span style="text-align: center;">Shortcuts</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="github" src="icons/github.svg">
-                    <span style="text-align: center;">Github</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="stocks" src="ios14icons/svg/stocks-2365239.svg">
-                    <span style="text-align: center;">Stocks</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="noname" src="ios14icons/svg/translate-2365238.svg">
-                    <span style="text-align: center;">Translate</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="instagram" src="icons/ig-instagram.svg">
-                    <span style="text-align: center;">Instagram</span>
-                </div>
-                <div class="appicon" onclick="window.open('//www.facebook.com')">
-                    <img class="appiconmove" name="noname" src="icons/facebook-app.svg">
-                    <span style="text-align: center;">Facebook</span>
-                </div>
-                <div class="appicon" onclick="window.open('//www.spotify.com')">
-                    <img class="appiconmove" name="noname" src="icons/spotify.svg">
-                    <span style="text-align: center;">Spotify</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="settings" src="ios14icons/svg/settings-2365240.svg">
-                    <span style="text-align: center;">Settings</span>
-                </div>
-                <div class="appicon" onclick="window.open('//www.linkedin.com')">
-                    <img class="appiconmove" name="linkedin" src="icons/linkedin-app.svg">
-                    <span style="text-align: center;">Linkedin</span>
-                </div>
-                <div class="appicon">
-                    <img class="appiconmove" name="w3schools" src="icons/imgs/w3schoolslogo.png">
-                    <span style="text-align: center;">w3schools</span>
-                </div>
-                <!-- empty -->
-                <div class="appicon empty">
-                    <img class="appiconmove" name="noname" src="ios14icons/svg/app-store-2365235.svg">
-                    <span style="text-align: center;">Empty</span>
-                </div>
-                <div class="appicon empty">
-                    <img class="appiconmove" name="noname" src="ios14icons/svg/app-store-2365235.svg">
-                    <span style="text-align: center;">Empty</span>
-                </div>
-                <div class="appicon empty">
-                    <img class="appiconmove" name="noname" src="ios14icons/svg/app-store-2365235.svg">
-                    <span style="text-align: center;">Empty</span>
-                </div>
-            </div>
+            <div class="hometopapptray"></div>
+
         </div>
         <div class="homebottomapptray">
             <div class="homebottomappbg homeapptray">
@@ -171,7 +85,7 @@
             </div>
         </div>
     </div>
-
 </body>
+<script src="ipadpro.js" type="module"></script>
 
 </html>
