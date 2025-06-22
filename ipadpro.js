@@ -4,6 +4,8 @@ import { apps } from './Data/appData.js';
 
 console.log(helloWorldMessage); // This will prove the import works.
 
+// todo: update code to use id to target window elements instead of class names and "this"
+
 const ct = document.getElementById('time');
 const dd = document.getElementById('daydate');
 if (ct) {
@@ -48,8 +50,109 @@ if (dd) {
 }
 
 const cursor = document.querySelector('.cursor');
+
 document.addEventListener('mousemove', e => {
-    cursor.setAttribute('style', 'top:' + (e.pageY) + 'px;left:' + (e.pageX) + 'px;');
+    if (!cursor.classList.contains('hover-full')) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    }
+});
+
+// Function to handle mouse entering an icon
+function onMouseHover(img, e) {
+
+    cursor.classList.add('hover-full');
+    const computedStyle = window.getComputedStyle(img);
+    const buttonBorderRadius = computedStyle.getPropertyValue('border-radius');
+    const imgRect = img.getBoundingClientRect();
+
+    cursor.style.width = imgRect.width + 'px';
+    cursor.style.height = imgRect.height + 'px';
+    cursor.style.border = '5px';
+
+    cursor.style.borderRadius = buttonBorderRadius;
+
+    // AI code
+    // Bind the specific image to the handler and add it
+    const boundHandler = handleIconMouseMove.bind(null, img);
+    img.addEventListener('mousemove', boundHandler);
+    // Store the bound handler on the image element so we can remove it later
+    img._boundMouseMoveHandler = boundHandler; // Using a custom property
+}
+
+// Function to handle mouse leaving an icon
+function onMouseHoverOut(img, e) {
+    img.style.top = ''; // Reset styles
+    img.style.left = '';
+
+    cursor.style.width = '';
+    cursor.style.height = '';
+    cursor.style.borderRadius = '';
+    cursor.classList.remove('hover-full');
+
+    // AI code
+    // Remove the specific bound handler
+    if (img._boundMouseMoveHandler) {
+        img.removeEventListener('mousemove', img._boundMouseMoveHandler);
+        delete img._boundMouseMoveHandler; // Clean up
+    }
+}
+
+// Use event delegation to handle hover effects for all '.cursor-intract' elements,
+// including those created dynamically after the page loads.
+document.body.addEventListener('mouseover', (e) => {
+    // Find the closest ancestor that is a cursor-intract element
+    const target = e.target.closest('.cursor-intract');
+
+    // If no such element is found, or if it's an app icon (which has its own handler), do nothing.
+    if (!target || target.classList.contains('appiconmove')) {
+        return;
+    }
+
+    // This check simulates `mouseenter`: it ensures the event doesn't re-trigger when moving between child elements.
+    // `e.relatedTarget` is the element the mouse came from.
+    if (!e.relatedTarget || !target.contains(e.relatedTarget)) {
+        const computedStyle = window.getComputedStyle(target);
+        const buttonBorderRadius = computedStyle.getPropertyValue('border-radius');
+
+        requestAnimationFrame(() => {
+            const rect = target.getBoundingClientRect();
+            cursor.classList.add('with-transition');
+            cursor.style.width = rect.width + 'px';
+            cursor.style.height = rect.height + 'px';
+            cursor.style.left = rect.left + window.scrollX + (rect.width / 2) + 'px';
+            cursor.style.top = rect.top + window.scrollY + (rect.height / 2) + 'px';
+            cursor.style.borderRadius = buttonBorderRadius;
+            cursor.classList.add('hover-full');
+            cursor.classList.remove('hovered');
+        });
+    }
+});
+
+document.body.addEventListener('mouseout', (e) => {
+    // Find the closest ancestor that is a cursor-intract element
+    const target = e.target.closest('.cursor-intract');
+
+    // If no such element is found, or if it's an app icon, do nothing.
+    if (!target || target.classList.contains('appiconmove')) {
+        return;
+    }
+
+    // This check simulates `mouseleave`: it ensures the event only triggers when leaving the element entirely.
+    // `e.relatedTarget` is the element the mouse is going to.
+    if (!e.relatedTarget || !target.contains(e.relatedTarget)) {
+        cursor.classList.add('with-transition');
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        cursor.classList.remove('hover-full');
+        cursor.style.borderRadius = '50%';
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+
+        setTimeout(() => {
+            cursor.classList.remove('with-transition');
+        }, 250);
+    }
 });
 
 // right click contextmenu
@@ -113,11 +216,9 @@ function createAppIcons() {
         appIconDiv.className = `appicon ${app.empty ? 'empty' : ''}`;
 
         const img = document.createElement('img');
-        if (app.content) {
-            img.className = 'appiconmove';
-        } else {
-            img.className = 'appiconmove appNotAvail';
-        }
+
+        img.className = `appiconmove cursor-intract ${app.content ? '' : 'appNotAvail'}`;
+
         img.dataset.id = app.id; // Use data-id for the identifier
         img.alt = app.label; // Add alt text for accessibility
         if (app.src) {
@@ -163,33 +264,13 @@ const handleIconMouseMove = (img, e) => {
     const left = (e.offsetX - (iconWidth / 2)) / woblestrength;
     img.style.top = `${top}px`; // Use style property directly for dynamic changes
     img.style.left = `${left}px`;
+
+    const imgRect = img.getBoundingClientRect();
+    // console.log("top left" + imgRect.top + " " + imgRect.left);
+    cursor.style.top = `${imgRect.top + (iconWidth / 2)}px`;
+    cursor.style.left = `${imgRect.left + (iconWidth / 2)}px`;
 };
 
-// Function to handle mouse entering an icon
-function onMouseHover(img, e) {
-    cursor.classList.add('cursorscale');
-    const top = 500;
-    const left = 500;
-    cursor.setAttribute('style', 'top:' + top + 'px !important;left:' + left + 'px !important;');
-
-    // Bind the specific image to the handler and add it
-    const boundHandler = handleIconMouseMove.bind(null, img);
-    img.addEventListener('mousemove', boundHandler);
-    // Store the bound handler on the image element so we can remove it later
-    img._boundMouseMoveHandler = boundHandler; // Using a custom property
-}
-
-// Function to handle mouse leaving an icon
-function onMouseHoverOut(img, e) {
-    cursor.classList.remove('cursorscale');
-    img.style.top = ''; // Reset styles
-    img.style.left = '';
-    // Remove the specific bound handler
-    if (img._boundMouseMoveHandler) {
-        img.removeEventListener('mousemove', img._boundMouseMoveHandler);
-        delete img._boundMouseMoveHandler; // Clean up
-    }
-}
 
 const body = document.getElementById("body");
 let activeWindow = null;
@@ -238,16 +319,16 @@ async function createwindow(app) {
     windowOptions.className = 'windowOptions';
 
     const minimizeButton = document.createElement('i');
-    minimizeButton.className = 'fa fa-window-minimize';
-    minimizeButton.addEventListener('click', () => minimizeWindowBtn(minimizeButton));
+    minimizeButton.className = 'fa fa-window-minimize cursor-intract';
+    minimizeButton.addEventListener('click', minimizeWindowBtn);
 
     const maximizeButton = document.createElement('i');
-    maximizeButton.className = 'fa fa-window-maximize';
-    maximizeButton.addEventListener('click', () => minmaxWindowBtn(maximizeButton));
+    maximizeButton.className = 'fa fa-window-maximize cursor-intract';
+    maximizeButton.addEventListener('click', minmaxWindowBtn);
 
     const closeButton = document.createElement('i');
-    closeButton.className = 'fa fa-close';
-    closeButton.addEventListener('click', () => closeWindowBtn(closeButton));
+    closeButton.className = 'fa fa-close cursor-intract';
+    closeButton.addEventListener('click', closeWindowBtn);
 
     windowOptions.appendChild(minimizeButton);
     windowOptions.appendChild(maximizeButton);
@@ -302,8 +383,9 @@ function showWindow(appId) {
     setOnTop(ele);
 }
 
-function closeWindowBtn(ele) {
-    const windowDiv = ele.closest('.window');
+function closeWindowBtn(event) {
+    const button = event.target;
+    const windowDiv = button.closest('.window');
     const appId = windowDiv.dataset.id;
     console.log(appId);
     console.log(appTrayArray);
@@ -313,22 +395,39 @@ function closeWindowBtn(ele) {
         appTrayArray.splice(index, 1); // 2nd parameter means remove one item only
     }
     console.log(appTrayArray);
-
+    resetCursorToDefault(event);
     if (windowDiv) {
         windowDiv.remove();
     }
 }
 
-function minmaxWindowBtn(ele) {
-    const windowDiv = ele.closest('.window');
+function resetCursorToDefault(event) {
+    // Manually reset the cursor style because the 'mouseout' event will not fire
+    // on an element that is being removed from the DOM.
+    cursor.classList.add('with-transition');
+    cursor.style.width = '20px';
+    cursor.style.height = '20px';
+    cursor.classList.remove('hover-full');
+    cursor.style.borderRadius = '50%';
+    cursor.style.left = event.clientX + 'px';
+    cursor.style.top = event.clientY + 'px';
+
+    setTimeout(() => {
+        cursor.classList.remove('with-transition');
+    }, 250);
+}
+
+function minmaxWindowBtn(event) {
+    const button = event.target;
+    const windowDiv = button.closest('.window');
     if (windowDiv) {
         windowDiv.classList.toggle('windowFullScreen');
-        ele.classList.toggle('fa-window-maximize');
-        ele.classList.toggle('fa-window-restore');
+        button.classList.toggle('fa-window-maximize');
+        button.classList.toggle('fa-window-restore');
     }
 }
-function minimizeWindowBtn(ele) {
-    const windowDiv = ele.closest('.window');
+function minimizeWindowBtn(event) {
+    const windowDiv = event.target.closest('.window');
     if (windowDiv) {
         windowDiv.classList.add('windowMinimized');
     }
@@ -380,6 +479,11 @@ function setOnTop(ele) {
 
 /* recent app bar */
 
+const menubottombarGhost = document.getElementById('menubottombarGhost');
+menubottombarGhost.addEventListener('click', (event) => {
+    menubottombar.click();
+    resetCursorToDefault(event);
+});
 const menubottombar = document.getElementById('menubottombar');
 const menubottombartrigger = document.getElementById('menubottombartrigger');
 const menuappsdiv = document.querySelector('.menuappsdiv');

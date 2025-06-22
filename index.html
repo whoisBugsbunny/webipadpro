@@ -13,7 +13,7 @@
 
 <body>
     <div id="body" class="background">
-        <div class="custom-cursor"></div>
+        <div class="cursor"></div>
         <div class="notificationbar">
             <div class="notificationleft">
                 <i class="fa fa-instagram"></i>
@@ -46,7 +46,6 @@
                 <div class="widget widgetclock widgetimgcommon"></div>
 
             </div>
-            <div class="cursor"></div>
             <div class="contextmenu wh-0p">
                 <div class="contextmenucontent">
                     <li>nothing</li>
@@ -61,17 +60,34 @@
         </div>
         <div class="homebottomapptray">
             <div class="homebottomappbg homeapptray">
-                <img class="appicon" src="ios14icons/svg/safari-2365241.svg" alt="" srcset="">
-                <img class="appicon" src="ios14icons/svg/ios-message-1575946.svg" alt="" srcset="">
-                <img class="appicon" src="ios14icons/svg/photos-2365244.svg" alt="" srcset="">
-                <img class="appicon" src="ios14icons/svg/notes-2365245.svg" alt="" srcset="">
-                <img class="appicon" src="ios14icons/svg/mail-2365225.svg" onclick="window.open('//www.gmail.com')" alt="" srcset="">
-                <img class="appicon" src="ios14icons/svg/camera-2365232.svg" alt="" srcset="">
-                <img class="appicon" src="icons/google-news.svg" onclick="window.open('//https://news.google.com/')" alt="" srcset="">
-                <img class="appicon" src="icons/twitter-app.svg" onclick="window.open('//www.twitter.com')" alt="" srcset="">
+                <div class="appicon">
+                    <img class="appiconBottom cursor-intract" src="ios14icons/svg/safari-2365241.svg" alt="" srcset="">
+                </div>
+                <div class="appicon">
+                    <img class="appiconBottom cursor-intract" src="ios14icons/svg/ios-message-1575946.svg" alt="" srcset="">
+                </div>
+                <div class="appicon">
+                    <img class="appiconBottom cursor-intract" src="ios14icons/svg/photos-2365244.svg" alt="" srcset="">
+                </div>
+                <div class="appicon">
+                    <img class="appiconBottom cursor-intract" src="ios14icons/svg/notes-2365245.svg" alt="" srcset="">
+                </div>
+                <div class="appicon">
+                    <img class="appiconBottom cursor-intract" src="ios14icons/svg/mail-2365225.svg" onclick="window.open('//www.gmail.com')" alt="" srcset="">
+                </div>
+                <div class="appicon">
+                    <img class="appiconBottom cursor-intract" src="ios14icons/svg/camera-2365232.svg" alt="" srcset="">
+                </div>
+                <div class="appicon">
+                    <img class="appiconBottom cursor-intract" src="icons/google-news.svg" onclick="window.open('//https://news.google.com/')" alt="" srcset="">
+                </div>
+                <div class="appicon">
+                    <img class="appiconBottom cursor-intract" src="icons/twitter-app.svg" onclick="window.open('//www.twitter.com')" alt="" srcset="">
+                </div>
             </div>
         </div>
         <div class="menubottombar">
+            <div id="menubottombarGhost" class="menubottombardiv-ghost cursor-intract"></div>
             <div id="menubottombar" class="menubottombardiv">
                 <!-- <div id="menubottombartrigger">
                     _
@@ -80,9 +96,10 @@
                     <div class="menuappsdiv"></div>
                 </div>
                 <div class="bottomapptrayopt">
-                    <div class="closeapptray"><i class="fa fa-close" style="font-size: x-large"></i></div>
+                    <div class="closeapptray cursor-intract"><i class="fa fa-close" style="font-size: x-large"></i></div>
                 </div>
             </div>
+
         </div>
     </div>
 </body>
